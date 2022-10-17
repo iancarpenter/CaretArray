@@ -4,26 +4,39 @@
     {
         static void Main(string[] args)
         {
-            int[] numbers = new int[] { 1, 2, 3 };
-            numbers = AddToArray(numbers, 4);
+            
+            ListOfNumbers numbers = new ListOfNumbers();
+
+            numbers.Add(1);
+            numbers.Add(2);
+            numbers.Add(3);
+            
+            Console.WriteLine(numbers.GetItemAt(2));
+                        
+        }       
+    }
+
+    public class ListOfNumbers
+    {
+        private int[] _numbers = new int[0];
+
+        public int GetItemAt(int index) => _numbers[index];
+        public void SetItemAt(int index, int value) => _numbers[index] = value;
+
+        public void Add(int newValue)
+        {
+            int[] updated = new int[_numbers.Length + 1];
+
+            for (int index = 0; index < _numbers.Length; index++)
+            {
+                updated[index] = _numbers[index];
+            }
 
             // use the index from end operator ^
-            // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/ranges#systemindex
-            Console.WriteLine($"The last number in the array in {numbers[^1]}");
-        }
+            // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/ranges#systemindex           
+            updated[^1] = newValue;
 
-        static int[] AddToArray(int[] input, int newNumber)
-        {
-            int[] output = new int[input.Length + 1];
-
-            for(int index = 0; index < input.Length; index++)
-            {
-                output[index] = input[index];                
-            }
-             
-            output[^1] = newNumber;
-
-            return output;
+            _numbers = updated;
         }
     }
 }
