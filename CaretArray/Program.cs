@@ -5,27 +5,33 @@
         static void Main(string[] args)
         {
             
-            ListOfNumbers numbers = new ListOfNumbers();
+            ListOf<int> numbers = new ListOf<int>();
 
             numbers.Add(1);
             numbers.Add(2);
             numbers.Add(3);
             
             Console.WriteLine(numbers.GetItemAt(2));
-                        
+
+            ListOf<string> strings = new ListOf<string>();
+
+            strings.Add("Hello");
+            strings.Add("Generics");
+
+            Console.WriteLine(strings.GetItemAt(0));                        
         }       
     }
 
-    public class ListOfNumbers
+    public class ListOf<T>
     {
-        private int[] _numbers = new int[0];
+        private T[] _numbers = new T[0];
 
-        public int GetItemAt(int index) => _numbers[index];
-        public void SetItemAt(int index, int value) => _numbers[index] = value;
+        public T GetItemAt(int index) => _numbers[index];
+        public void SetItemAt(int index, T value) => _numbers[index] = value;
 
-        public void Add(int newValue)
+        public void Add(T newValue)
         {
-            int[] updated = new int[_numbers.Length + 1];
+            T[] updated = new T[_numbers.Length + 1];
 
             for (int index = 0; index < _numbers.Length; index++)
             {
